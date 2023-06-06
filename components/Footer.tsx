@@ -4,8 +4,15 @@ import * as prismicH from "@prismicio/helpers";
 import { Bounded } from "./Bounded";
 import { Heading } from "./Heading";
 import { HorizontalDivider } from "./HorizontalDivider";
+import { SettingsDocument } from "../types.generated";
+import { FC } from "react";
 
-const SignUpForm = ({ settings }) => {
+type FooterProps = {
+  withSignUpForm?: boolean;
+  settings: SettingsDocument;
+}
+
+const SignUpForm = ({ settings }: Pick<FooterProps, "settings">) => {
   return (
     <div className="px-4">
       <form
@@ -61,18 +68,12 @@ const SignUpForm = ({ settings }) => {
   );
 };
 
-export const Footer = ({ withSignUpForm = true, settings }) => {
+export const Footer: FC<FooterProps> = ({ withSignUpForm = true, settings }) => {
   return (
     <Bounded as="footer">
       <div className="grid grid-cols-1 justify-items-center gap-24">
         <HorizontalDivider />
         {withSignUpForm && <SignUpForm settings={settings} />}
-        <div className="mx-auto w-full max-w-3xl text-center text-xs font-semibold tracking-tight text-slate-500">
-          Proudly published using{" "}
-          <PrismicLink href="https://prismic.io" className="text-slate-700">
-            Prismic
-          </PrismicLink>
-        </div>
       </div>
     </Bounded>
   );

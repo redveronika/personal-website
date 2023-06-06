@@ -3,8 +3,8 @@ import { ArticleDocument } from "../types.generated";
 import type { Content } from '@prismicio/client'
 
 export const getExcerpt = (slices: Content.ArticleDocumentDataSlicesSlice[]) => {
-  const text = slices
-    .filter((slice) => slice.slice_type === "text")
+  const text = (slices
+    .filter((slice) => slice.slice_type === "text") as Content.TextSlice[])
     .map((slice) => prismicH.asText(slice.primary.text))
     .join(" ");
 
