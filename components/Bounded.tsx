@@ -1,6 +1,14 @@
 import clsx from "clsx";
+import { FC, ReactNode } from "react";
 
-export const Bounded = ({
+type BoundedProps = {
+  as?: "footer" | "header" | "div" | "section";
+  size?: "small"| "base" | "wide" | "widest";
+  children?: ReactNode;
+  className?: string;
+}
+
+export const Bounded: FC<BoundedProps> = ({
   as: Comp = "div",
   size = "base",
   className,

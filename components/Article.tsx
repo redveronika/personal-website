@@ -2,24 +2,32 @@ import { PrismicLink, PrismicText } from "@prismicio/react";
 import { PrismicNextImage } from "@prismicio/next";
 import * as prismicH from "@prismicio/helpers";
 
+
 import { getExcerpt } from "../lib/getExcerpt";
 import { findFirstImage } from "../lib/findFirstImage";
 import { dateFormatter } from "../lib/dateFormatter";
-import { Heading } from "../components/Heading";
+import { Heading } from "./Heading";
+import { FC } from "react";
+import { ArticleDocument } from "../types.generated";
 
-export const Article = ({ article }) => {
+type ArticleProps = {
+  article: ArticleDocument
+}
+
+export const Article: FC<ArticleProps> = ({ article }) => {
   const featuredImage =
     (prismicH.isFilled.image(article.data.featuredImage) &&
       article.data.featuredImage) ||
     findFirstImage(article.data.slices);
+                     
   const date = prismicH.asDate(
-    article.data.publishDate || article.first_publication_date
+    (article.data.publishDate || article.first_publication_date as `${number}-${number}-${number}`)
   );
   const excerpt = getExcerpt(article.data.slices);
 
   return (
     <li className="grid grid-cols-1 items-start gap-6 md:grid-cols-3 md:gap-8">
-      <PrismicLink document={article} tabIndex="-1">
+      <PrismicLink document={article} tabIndex={-1}>
         <div className="aspect-w-4 aspect-h-3 relative bg-gray-100">
           {prismicH.isFilled.image(featuredImage) && (
             <PrismicNextImage

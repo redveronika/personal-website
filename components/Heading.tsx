@@ -1,6 +1,14 @@
 import clsx from "clsx";
+import { FC, ReactNode } from "react";
 
-export const Heading = ({
+type HeadingProps = {
+  as?: "h1" | "h2" | "h3";
+  size?: "xl" | "2xl" | "3xl" | "4xl";
+  children?: ReactNode;
+  className?: string;
+}
+
+export const Heading: FC<HeadingProps> = ({
   as: Comp = "h1",
   size = "4xl",
   children,

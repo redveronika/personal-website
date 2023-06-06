@@ -1,6 +1,7 @@
+import { Content } from "@prismicio/client";
 import * as prismicH from "@prismicio/helpers";
 
-export const findFirstImage = (slices) => {
+export const findFirstImage = (slices: Content.ArticleDocumentDataSlicesSlice[]) => {
   const imageSlice = slices.find((slice) => slice.slice_type === "image");
 
   if (imageSlice && prismicH.isFilled.image(imageSlice.primary.image)) {
